@@ -5,7 +5,7 @@
             <AddContent v-on:addContent="addContent" />
         </div>
         <div id="content-gallery">
-            <div :key="content.title" v-for="content in contentList" >
+            <div v-bind:key="content.id" v-for="content in contentList" >
                 <ContentCard v-bind:content="content"/>
             </div>
         </div>
@@ -17,10 +17,45 @@ import ContentCard from './ContentCard.vue';
 import AddContent from './AddContent.vue';
 
 export default {
+    mounted: function(){
+        this.getMovies();
+    },
     methods: {
+        renderList(data){
+            this.contentList = data;
+            this.rendercomponent = !this.rendercomponent;
+        },
         addContent(content){
             console.log("Adding the following:", content);
-            this.contentList.push(content);
+            fetch('/add/movie/', {
+                method: 'post',
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    id: content.id,
+                    release: content.release,
+                    artist: content.artist,
+                    poster: content.poster,
+                    title: content.title, 
+                    user: '9420'
+                })
+            })
+            .then(resp => resp.json())
+            .then(data => console.log(data));
+            this.getMovies();
+        },
+        getMovies(){
+            fetch('/get/movies/9420')
+            .then(resp => resp.json())
+            .then(data => {
+                this.renderList(data);
+            });
+        }
+    },
+    watch: {
+        rendercomponent: function(val){
+            this.rendercomponent = val;
         }
     },
     data(){
@@ -43,8 +78,9 @@ export default {
                     time: "2013",
                     artist: "Spike Jonze",
                     image: "https://m.media-amazon.com/images/M/MV5BMjA1Nzk0OTM2OF5BMl5BanBnXkFtZTgwNjU2NjEwMDE@._V1_UX182_CR0,0,182,268_AL__QL50.jpg"
-                }
-            ]
+                },
+            ],
+            rendercomponent: true
         }
     },
     components: {

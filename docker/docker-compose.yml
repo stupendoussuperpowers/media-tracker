@@ -20,20 +20,20 @@ services:
     depends_on: 
       - db
   
-  # client:
-  #   build:
-  #     context: ../client
-  #     dockerfile: ../docker/client.Dockerfile
-  #   restart: unless-stopped
-  #   networks:
-  #     - network
-  #   volumes:
-  #     - ../client:/usr/src/client
-  #   expose:
-  #     - 8080
-  #   ports:
-  #     - 8080:8080
-  #   env_file: ../.env
+  client:
+    build:
+      context: ../client
+      dockerfile: ../docker/client.Dockerfile
+    restart: unless-stopped
+    networks:
+      - network
+    volumes:
+      - ../client:/usr/src/client
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    env_file: ../.env
   
   db:
     build:

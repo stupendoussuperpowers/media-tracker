@@ -1,9 +1,9 @@
 <template>
-    <div id = "card" :style="{ backgroundImage: `url(${content.image})` }">
+    <div id = "card" :style="{ backgroundImage: `url(${content.poster})` }">
         <!-- <img id = "header" :src=content.image /> -->
         <div id="background-text">
             <div id = "title">{{content.title}}</div>
-            <div id = "time">{{content.time}}</div>
+            <div id = "time">{{content.release_year}}</div>
             <div id = "artist">{{content.artist}}</div>
         </div>
     </div>    

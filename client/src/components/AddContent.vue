@@ -13,12 +13,15 @@ import Autocomplete from '@trevoreyre/autocomplete-vue';
 export default {
     
     methods:{
+        
         addContent(){
+            console.log("alright, mighty");
             const newContent = {
                 title: this.title,
-                time: this.year,
+                id: this.key,
+                release: this.year,
                 artist: this.artist,
-                image: this.image
+                poster: this.image
             }
             this.$emit('addContent', newContent);
         },
@@ -40,6 +43,7 @@ export default {
         },
         getResultValue(result){
             this.newitem = result;
+            console.log("The new result is", result);
             return result.value;
         },
         onSubmit(result){
@@ -61,6 +65,7 @@ export default {
             year: '',
             artist: '',
             image: '',
+            key: '',
             notfetched: true,
             selected: {
                 value: '',
