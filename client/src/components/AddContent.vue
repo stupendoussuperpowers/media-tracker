@@ -27,7 +27,7 @@ export default {
         },
         search(input){
             
-            var url = `/search/movies/${input}`
+            var url = `/api/movies/search/${input}`
 
             return new Promise(resolve => {
                 if (input.length < 3) {
@@ -48,7 +48,7 @@ export default {
         },
         onSubmit(result){
             console.log(result);
-            fetch(`/movie/${this.newitem.key}`)
+            fetch(`/api/movies/${this.newitem.key}`)
             .then(resp => resp.json())
             .then(data => {
                 console.log(data);

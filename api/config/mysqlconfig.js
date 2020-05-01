@@ -1,13 +1,18 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-const db = mysql.createConnection({
-    host: 'db',
-    port: '3306',
-    user: 'root',
-    password: 'root',
-    database: 'mediatracker'
-});
+async function initDb(){
+    return await mysql.createConnection({
+        host: 'db',
+        port: '3306',
+        user: 'root',
+        password: 'root',
+        database: 'mediatracker'
+    })
+}
 
-db.connect()
+async function closeDb(db){
+    await db.close();
+}
 
-module.exports = db;
+exports.initDb = initDb;
+exports.closeDb = closeDb;

@@ -27,7 +27,7 @@ export default {
         },
         addContent(content){
             console.log("Adding the following:", content);
-            fetch('/add/movie/', {
+            fetch('/api/movies/add/', {
                 method: 'post',
                 headers:{
                     "Content-Type": "application/json"
@@ -46,7 +46,7 @@ export default {
             this.getMovies();
         },
         getMovies(){
-            fetch('/get/movies/9420')
+            fetch('/api/movies/getall/9420')
             .then(resp => resp.json())
             .then(data => {
                 this.renderList(data);
